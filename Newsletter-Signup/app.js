@@ -11,6 +11,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get("/", function(req, res){
+    console.log(req.path);
     res.sendFile(__dirname + "/signup.html");
 });
 //mail chimp api 4cd9034d6dc4988e1a7175e38ac8a2a4-us4
@@ -18,6 +19,7 @@ app.get("/", function(req, res){
 
 
 app.post("/", function(req, res){
+   console.log(req.path);
    let fname = req.body.fname;
    let lname = req.body.lname;
    let email = req.body.email;
@@ -37,10 +39,10 @@ app.post("/", function(req, res){
     jsonData = JSON.stringify(data);
 
     let options = {
-        url: "https://us4.api.mailchimp.com/3.0/lists/719c12c9d8",
+        url: "https://us4.api.mailchimp.com/3.0/lists/709c02c9d8",
         method: "POST",
         headers: {
-            "Authorization": "sribarrow 4cd9134d6dc4988e1a7175e38ac8a2a4-us5"
+            "Authorization": "sribarrow c4bd78b0f25bf0ae0aa33993694f5f20-us4"
         },
         body: jsonData
     };
@@ -61,14 +63,19 @@ app.post("/", function(req, res){
 });
 
 app.post("/failure", function(req, res){
+    console.log(req.path);
     res.redirect("/");
 });
 
 app.post("/success", function(req, res){
+    console.log(req.path);
     res.redirect("/");
 });
 
-app.listen(3000, function(){
+// app.listen(3000, function(){
+//     console.log("App Server is running in port 3000.")
+// });
+
+app.listen(process.env.PORT || 3000, function(){
     console.log("App Server is running in port 3000.")
 });
-
