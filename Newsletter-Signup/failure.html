@@ -30,6 +30,10 @@
         <div class="container">
           <h1 class="display-4 red">There was an error encountered while processing.</h1>
           <p class="lead">Please try again or contact the administrator.</p>
+
+          <form action="/failure" method="post">
+                <button class="btn btn-lg btn-warning" type="submit" name="tryagain">Try again</button>
+        </form>
         </div>
       </div>
 </body>
