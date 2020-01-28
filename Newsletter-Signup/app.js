@@ -33,26 +33,31 @@ app.post("/", function(req, res){
             }
         ]
     }
+
     jsonData = JSON.stringify(data);
 
     let options = {
-        url: "https://us4.api.mailchimp.com/3.0/lists/709c02c9d8",
+        url: "https://us4.api.mailchimp.com/3.0/lists/719c12c9d8",
         method: "POST",
         headers: {
-            "Authorization": "sribarrow 4cd9034d6dc4988e1a7175e38ac8a2a4-us4"
+            "Authorization": "sribarrow 4cd9134d6dc4988e1a7175e38ac8a2a4-us5"
         },
         body: jsonData
     };
-   request(options,function(error, response, body ){
+
+   request(options, function(error, response, body ){
        if(error){
-           console.log(error);
+           //res.send("There was an error encountered while processing. Please try again or contact the administrtor.");
+           res.sendFile(__dirname + "/failure.html");
        } else {
-           console.log(response.statusCode);
+           if(response.statusCode === 200){
+                res.sendFile(__dirname + "/success.html");
+           } else {
+                res.sendFile(__dirname + "/failure.html");
+           }
+           //res.send("<h1>Well done! "+ fname + ", you are now subscribed to our news letter.</h1>");
        }
    });
-   
-    res.send("<h1>Well done! "+ fname + ", you are now subscribed to our news letter.</h1>");
-
 });
 
 app.listen(3000, function(){
